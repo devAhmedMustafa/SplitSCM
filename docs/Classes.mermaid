@@ -1,0 +1,88 @@
+classDiagram
+
+    %% content-addressable store for blobs, manifests, trees, commits
+    class ObjectStore {
+        - path: str
+        + hasObject(hash: str) bool
+        + storeObject(data: bytes) str
+        + loadObject(hash: str) bytes
+        + findBaseVersion(filePath: str) str
+    }
+
+    %% representation of the file structure in a commit
+    class Tree {
+        - entries: dict~str, str~
+        + serialize() bytes
+        + deserialize(data: bytes) Tree
+    }
+
+    %% snapshot of a tree with metadata (message, author, parent)
+    class Commit {
+        - treeHash: str
+        - parentHash: str
+        - msg: str
+        - author: str
+        - timestamp: str
+        + serialize() bytes
+        + deserialize(data: bytes) Commit
+    }
+
+    class CommitHistory {
+        - commits: list~Commit~
+        + addCommit(commit: Commit)
+        + getCommit(hash: str) Commit
+        + getLatest() Commit
+    }
+
+    %% staging area before commit
+    class Index {
+        - path: str
+        - entries: dict~str, str~
+        + stageFile(filePath: str, manifestHash: str)
+        + getStagedFiles() dict~str, str~
+        + clear()
+    }
+
+    %% manages index, refs, and object storage
+    class Repository {
+        - name : str
+        - rootPath: str
+        - objectStore: ObjectStore
+        - index: Index
+        - history: CommitHistory
+        + init()
+        + add(filePath: str)
+        + commit(message: str, author: str)
+        + checkout(commitHash: str)
+        + getStatus() Status
+    }
+
+    class DeltaCompressor {
+        + createDelta(baseFile: str, modifiedFile: str) Delta
+        + applyDelta(baseFile: str, delta: Delta, outputFile: str)
+    }
+
+    class Delta {
+        - changes: list~DeltaInstruction~
+        + getChanges() list~DeltaInstruction~
+    }
+
+    class DeltaInstruction {
+        - type: str
+        - offset: int
+        - length: int
+        - data: bytes
+    }
+
+    class Status {
+        - addedFiles: list~str~
+        - modifiedFiles: list~str~
+        - deletedFiles: list~str~
+    }
+
+    Repository --> ObjectStore
+    Repository --> Index
+    Repository --> CommitHistory
+    Repository --> Tree
+    CommitHistory --> Commit
+    DeltaCompressor --> Delta

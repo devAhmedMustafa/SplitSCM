@@ -1,0 +1,31 @@
+sequenceDiagram
+    participant User
+    participant Repository
+    participant Index
+    participant ObjectStore
+    participant DeltaCompressor
+    participant Tree
+    participant Commit
+    participant CommitHistory
+
+    User->>Repository: commit(message, author)
+    Repository->>Index: getStagedEntries()
+    loop for each staged entry
+        alt entry is delta
+            Repository->>ObjectStore: storeObject(baseHash)
+            ObjectStore-->>Repository: deltaHash
+        else full blob
+            Repository->>ObjectStore: storeObject(blobData)
+            ObjectStore-->>Repository: blobHash
+        end
+    end
+
+    Repository->>Tree: serialize() with blob/delta hashes
+    Tree-->>Repository: treeData
+    Repository->>ObjectStore: storeObject(treeData)
+    ObjectStore-->>Repository: treeHash
+    Repository->>Commit: create(treeHash, parentHash, metadata)
+    Commit-->>Repository: commitData
+    Repository->>ObjectStore: storeObject(commitData)
+    ObjectStore-->>Repository: commitHash
+    Repository->>CommitHistory: addCommit(commitHash)

@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant User
+    participant Repository
+    participant ObjectStore
+    participant DeltaCompressor
+    participant WorkingDirectory
+
+    User->>Repository: checkout(commitHash)
+    Repository->>ObjectStore: loadObject(commitHash)
+    ObjectStore-->>Repository: commitData
+    Repository->>ObjectStore: loadObject(treeHash from commitData)
+    loop for each file in tree
+        alt file is full blob
+            Repository->>ObjectStore: loadObject(blobHash)
+            ObjectStore-->>Repository: fileData
+        else file is delta
+            Repository->>ObjectStore: loadBaseBlob(baseHash)
+            ObjectStore-->>Repository: baseData
+            Repository->>ObjectStore: loadObject(deltaHash)
+            ObjectStore-->>Repository: deltaData
+            Repository->>DeltaCompressor: applyDelta(baseData, deltaData)
+            DeltaCompressor-->>Repository: fileData
+        end
+        Repository->>WorkingDirectory: writeFile(filePath, fileData)
+    end

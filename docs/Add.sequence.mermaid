@@ -1,0 +1,19 @@
+sequenceDiagram
+    actor User
+    participant Repository
+    participant Index
+    participant WorkingDirectory
+    participant ObjectStore
+    participant DeltaCompressor
+
+    User->>Repository: add(filePath)
+    Repository->>WorkingDirectory: readFile(filePath)
+    WorkingDirectory-->>Repository: fileData
+    Repository->>ObjectStore: findBaseVersion(filePath)
+    alt base exists
+        Repository->>DeltaCompressor: createDelta(baseFile, fileData)
+        DeltaCompressor-->>Repository: delta
+        Repository->>Index: stageDelta(filePath, baseHash, delta)
+    else
+        Repository->>Index: stageFullBlob(filePath, fileData)
+    end

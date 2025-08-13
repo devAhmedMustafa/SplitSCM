@@ -1,0 +1,7 @@
+stateDiagram-v2
+    [*] --> Untracked
+    Untracked --> Staged: add file
+    Staged --> Untracked: remove file
+    Staged --> Committed: commit
+    Committed --> Staged: modify + add again
+    Committed --> Untracked: reset

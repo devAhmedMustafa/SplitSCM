@@ -70,7 +70,47 @@ namespace Split {
         fs.close();
     }
 
+    std::map<std::string, std::string> Index::getStagedFiles() const {
+        std::map<std::string, std::string> stagedFiles;
+        for (const auto &pair : entries) {
+            if (!pair.second.isDeleted) {
+                stagedFiles[pair.first] = pair.second.blobHash;
+            }
+        }
+        return stagedFiles;
+    }
 
+    void Index::removeStagedFile(const std::string &filepath) {
+        auto it = entries.find(filepath);
+        if (it != entries.end()) {
+            it->second.isDeleted = true;
+        }
+
+        // Write the updated index to disk
+        std::fstream fs(this->path, std::ios::out | std::ios::binary);
+
+        for (const auto &pair : entries) {
+            const IndexEntry &e = pair.second;
+
+            // Serialize filePath
+            uint32_t pathLen = e.filePath.size();
+            fs.write(reinterpret_cast<const char*>(&pathLen), sizeof(pathLen));
+            fs.write(e.filePath.data(), pathLen);
+
+            // Serialize blobHash
+            uint32_t hashLen = e.blobHash.size();
+            fs.write(reinterpret_cast<const char*>(&hashLen), sizeof(hashLen));
+            fs.write(e.blobHash.data(), hashLen);
+
+            // Serialize other fields
+            fs.write(reinterpret_cast<const char*>(&e.mode), sizeof(e.mode));
+            fs.write(reinterpret_cast<const char*>(&e.size), sizeof(e.size));
+            fs.write(reinterpret_cast<const char*>(&e.mtime), sizeof(e.mtime));
+            fs.write(reinterpret_cast<const char*>(&e.isDeleted), sizeof(e.isDeleted));
+        }
+
+        fs.close();
+    }
 
 
 }

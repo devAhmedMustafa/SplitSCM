@@ -23,8 +23,9 @@ namespace Split {
         std::filesystem::create_directories(repoPath + "/objects");
     }
 
-
-
+    void Repository::add(const std::string &filepath) {
+        index.stageFile(filepath);
+    }
 
 
 }

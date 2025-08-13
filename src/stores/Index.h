@@ -10,13 +10,25 @@
 
 namespace Split {
 
+    struct IndexEntry {
+        std::string filePath;
+        std::string blobHash;
+        uint32_t mode; // File mode (permissions)
+        uint64_t size;
+        uint64_t mtime; // Last modified time
+        bool isDeleted;
+    };
+
     class Index {
 
         std::string path;
-        std::map<std::string, std::string> entries; // Maps file paths to their base version hashes
+        std::map<std::string, IndexEntry> entries; // Maps file paths to their base version hashes
 
     public:
-        void stageFile(const std::string& filepath, const std::string& baseVersionHash);
+
+        explicit Index(std::string rootPath);
+
+        void stageFile(const std::string& filepath);
         std::map<std::string, std::string> getStagedFiles() const;
         void removeStagedFile(const std::string& filepath);
 

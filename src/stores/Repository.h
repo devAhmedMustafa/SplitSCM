@@ -21,7 +21,9 @@ namespace Split {
         CommitHistory history;
 
     public:
-        void init();
+        Repository(std::string  name, const std::string& rootPath);
+
+        void init() const;
         void add(const std::string& filepath);
         void commit(const std::string& message, const std::string& author);
         void checkout(const std::string& commitHash);

@@ -6,7 +6,6 @@
 #define COMMIT_H
 
 #include <string>
-#include <vector>
 
 namespace Split {
 

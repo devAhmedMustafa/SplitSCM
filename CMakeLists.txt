@@ -17,4 +17,5 @@ add_executable(SplitSCM main.cpp
         src/utils/Delta.h
         src/utils/DeltaInstruction.h
         src/utils/Hashing.h
-        src/utils/SHA1.h)
+        src/utils/SHA1.h
+        src/utils/Time.h)

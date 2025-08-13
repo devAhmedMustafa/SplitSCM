@@ -30,6 +30,17 @@ namespace Split {
             filepath, "", 0, 0, 0, false
         };
 
+        const std::string blobHash = Hashing::computeHash(filepath);
+
+        if (entries.find(filepath) != entries.end()) {
+            if (entries[filepath].blobHash == blobHash) {
+                return;
+            }
+        }
+        else {
+
+        }
+
         std::fstream originalFs(filepath, std::ios::in | std::ios::binary);
         if (originalFs.is_open()) {
             originalFs.seekg(0, std::ios::end);
@@ -39,7 +50,6 @@ namespace Split {
             originalFs.close();
         }
 
-        const std::string blobHash = Hashing::computeHash(filepath);
         entry.blobHash = blobHash;
 
         entries[filepath] = entry;

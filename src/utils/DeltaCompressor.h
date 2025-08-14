@@ -6,15 +6,13 @@
 #define DELTACOMPRESSOR_H
 
 #include <string>
-#include "Delta.h"
 
 namespace Split {
     class DeltaCompressor {
 
     public:
-        Delta compress(const std::string& baseFile, const std::string& modifiedFile);
-
-        void decompress(const Delta& delta, const std::string& baseFile, std::string& outputFile) const;
+        static std::string encode(const std::string& , const std::string& );
+        static std::string decode( const std::string& , std::string&);
 
     };
 }

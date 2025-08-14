@@ -1,3 +1,0 @@
-[submodule "lib/xdelta"]
-	path = lib/xdelta
-	url = https://github.com/jmacd/xdelta

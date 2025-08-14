@@ -11,12 +11,16 @@ namespace Split {
 
     class ObjectStore {
 
+        std::string basePath = ".split/objects";
         std::string path;
+
     public:
+
+        ObjectStore(const std::string& );
+
         bool hasObject(const std::string& hash) const;
-        std::string storeObject(const std::byte[], size_t);
-        std::byte* loadObject(const std::string& hash, size_t& size) const;
-        std::string findBaseVersion(const std::string& filepath) const;
+        std::string storeFileObject(const std::string& filePath) const;
+        std::fstream* loadObject(const std::string& hash) const;
     };
 
 }

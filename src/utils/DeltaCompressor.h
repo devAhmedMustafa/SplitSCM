@@ -11,9 +11,8 @@ namespace Split {
     class DeltaCompressor {
 
     public:
-        static std::string encode(const std::string& , const std::string& );
-        static std::string decode( const std::string& , std::string&);
-
+        std::string encode(const std::string& , const std::string& );
+        std::string decode( const std::string& , std::string&);
     };
 }
 

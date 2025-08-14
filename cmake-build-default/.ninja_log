@@ -1,0 +1,82 @@
+# ninja log v6
+5	107	7768709595877055	CMakeFiles/SplitSCM.dir/src/utils/ObjectStore.cpp.obj.ddi	9e66803adeeac868
+92	126	7768720666677114	CMakeFiles/SplitSCM.dir/main.cpp.obj.modmap	eb980469a7de3788
+92	126	7768720666677114	C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default/CMakeFiles/SplitSCM.dir/CXXModules.json	eb980469a7de3788
+8	160	7768709595907139	CMakeFiles/SplitSCM.dir/src/stores/Index.cpp.obj.ddi	388edbba2c0e1156
+2	124	7768709595842021	CMakeFiles/SplitSCM.dir/main.cpp.obj.ddi	4a2732f38c53623b
+2	91	7768720665780501	CMakeFiles/SplitSCM.dir/src/utils/DeltaCompressor.cpp.obj.ddi	a280ea5e5bc7b1f3
+11	170	7768709595937122	CMakeFiles/SplitSCM.dir/src/stores/Repository.cpp.obj.ddi	2d5cc4f2071dde94
+92	126	7768720666677114	CMakeFiles/SplitSCM.dir/CXX.dd	eb980469a7de3788
+239	1846	7768709598209522	CMakeFiles/SplitSCM.dir/src/stores/Repository.cpp.obj	85224decc084e1c
+92	126	7768720666677114	CMakeFiles/SplitSCM.dir/src/utils/ObjectStore.cpp.obj.modmap	eb980469a7de3788
+127	853	7768720667033270	CMakeFiles/SplitSCM.dir/src/utils/DeltaCompressor.cpp.obj	86645812b31e54f1
+92	126	7768720666677114	CMakeFiles/SplitSCM.dir/src/stores/Index.cpp.obj.modmap	eb980469a7de3788
+92	126	7768720666677114	CMakeFiles/SplitSCM.dir/src/stores/Repository.cpp.obj.modmap	eb980469a7de3788
+230	926	7768709598114315	CMakeFiles/SplitSCM.dir/main.cpp.obj	938c3f1248ceda45
+92	126	7768720666677114	CMakeFiles/SplitSCM.dir/src/utils/DeltaCompressor.cpp.obj.modmap	eb980469a7de3788
+233	688	7768709598154297	CMakeFiles/SplitSCM.dir/src/utils/ObjectStore.cpp.obj	7e8623750cf9a03e
+236	1924	7768709598179376	CMakeFiles/SplitSCM.dir/src/stores/Index.cpp.obj	c57fb874a9965032
+853	1050	7768720674289367	SplitSCM.exe	fcb12bf3916f41f6
+2	134	7768881982599142	build.ninja	932fc2e222bdbd97
+24	124	7768884302267332	CMakeFiles/SplitSCM.dir/src/utils/DeltaCompressor.cpp.obj.ddi	a280ea5e5bc7b1f3
+19	140	7768884302217352	CMakeFiles/SplitSCM.dir/main.cpp.obj.ddi	4a2732f38c53623b
+140	167	7768884303417808	CMakeFiles/SplitSCM.dir/CXX.dd	eb980469a7de3788
+140	167	7768884303417808	C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default/CMakeFiles/SplitSCM.dir/CXXModules.json	eb980469a7de3788
+140	167	7768884303417808	CMakeFiles/SplitSCM.dir/main.cpp.obj.modmap	eb980469a7de3788
+140	167	7768884303417808	CMakeFiles/SplitSCM.dir/src/utils/ObjectStore.cpp.obj.modmap	eb980469a7de3788
+140	167	7768884303417808	CMakeFiles/SplitSCM.dir/src/stores/Index.cpp.obj.modmap	eb980469a7de3788
+140	167	7768884303417808	CMakeFiles/SplitSCM.dir/src/stores/Repository.cpp.obj.modmap	eb980469a7de3788
+140	167	7768884303417808	CMakeFiles/SplitSCM.dir/src/utils/DeltaCompressor.cpp.obj.modmap	eb980469a7de3788
+171	969	7768884303734754	CMakeFiles/SplitSCM.dir/src/utils/DeltaCompressor.cpp.obj	86645812b31e54f1
+168	1206	7768884303704703	CMakeFiles/SplitSCM.dir/main.cpp.obj	938c3f1248ceda45
+1206	1823	7768884314085644	SplitSCM.exe	fcb12bf3916f41f6
+24	147	7768891516108480	CMakeFiles/SplitSCM.dir/main.cpp.obj.ddi	4a2732f38c53623b
+147	182	7768891517340423	CMakeFiles/SplitSCM.dir/CXX.dd	eb980469a7de3788
+147	182	7768891517340423	C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default/CMakeFiles/SplitSCM.dir/CXXModules.json	eb980469a7de3788
+147	182	7768891517340423	CMakeFiles/SplitSCM.dir/main.cpp.obj.modmap	eb980469a7de3788
+147	182	7768891517340423	CMakeFiles/SplitSCM.dir/src/utils/ObjectStore.cpp.obj.modmap	eb980469a7de3788
+147	182	7768891517340423	CMakeFiles/SplitSCM.dir/src/stores/Index.cpp.obj.modmap	eb980469a7de3788
+147	182	7768891517340423	CMakeFiles/SplitSCM.dir/src/stores/Repository.cpp.obj.modmap	eb980469a7de3788
+147	182	7768891517340423	CMakeFiles/SplitSCM.dir/src/utils/DeltaCompressor.cpp.obj.modmap	eb980469a7de3788
+183	1195	7768891517701729	CMakeFiles/SplitSCM.dir/main.cpp.obj	938c3f1248ceda45
+1195	1683	7768891527817823	SplitSCM.exe	fcb12bf3916f41f6
+20	129	7768892443200027	CMakeFiles/SplitSCM.dir/main.cpp.obj.ddi	4a2732f38c53623b
+129	155	7768892444291557	CMakeFiles/SplitSCM.dir/CXX.dd	eb980469a7de3788
+129	155	7768892444291557	C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default/CMakeFiles/SplitSCM.dir/CXXModules.json	eb980469a7de3788
+129	155	7768892444291557	CMakeFiles/SplitSCM.dir/main.cpp.obj.modmap	eb980469a7de3788
+129	155	7768892444291557	CMakeFiles/SplitSCM.dir/src/utils/ObjectStore.cpp.obj.modmap	eb980469a7de3788
+129	155	7768892444291557	CMakeFiles/SplitSCM.dir/src/stores/Index.cpp.obj.modmap	eb980469a7de3788
+129	155	7768892444291557	CMakeFiles/SplitSCM.dir/src/stores/Repository.cpp.obj.modmap	eb980469a7de3788
+129	155	7768892444291557	CMakeFiles/SplitSCM.dir/src/utils/DeltaCompressor.cpp.obj.modmap	eb980469a7de3788
+156	804	7768892444569268	CMakeFiles/SplitSCM.dir/main.cpp.obj	938c3f1248ceda45
+805	974	7768892451050788	SplitSCM.exe	fcb12bf3916f41f6
+20	126	7768892835716221	CMakeFiles/SplitSCM.dir/main.cpp.obj.ddi	4a2732f38c53623b
+127	153	7768892836789848	CMakeFiles/SplitSCM.dir/CXX.dd	eb980469a7de3788
+127	153	7768892836789848	C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default/CMakeFiles/SplitSCM.dir/CXXModules.json	eb980469a7de3788
+127	153	7768892836789848	CMakeFiles/SplitSCM.dir/main.cpp.obj.modmap	eb980469a7de3788
+127	153	7768892836789848	CMakeFiles/SplitSCM.dir/src/utils/ObjectStore.cpp.obj.modmap	eb980469a7de3788
+127	153	7768892836789848	CMakeFiles/SplitSCM.dir/src/stores/Index.cpp.obj.modmap	eb980469a7de3788
+127	153	7768892836789848	CMakeFiles/SplitSCM.dir/src/stores/Repository.cpp.obj.modmap	eb980469a7de3788
+127	153	7768892836789848	CMakeFiles/SplitSCM.dir/src/utils/DeltaCompressor.cpp.obj.modmap	eb980469a7de3788
+155	812	7768892837066575	CMakeFiles/SplitSCM.dir/main.cpp.obj	938c3f1248ceda45
+812	923	7768892843645820	SplitSCM.exe	fcb12bf3916f41f6
+23	132	7768892932336888	CMakeFiles/SplitSCM.dir/main.cpp.obj.ddi	4a2732f38c53623b
+132	157	7768892933432568	CMakeFiles/SplitSCM.dir/CXX.dd	eb980469a7de3788
+132	157	7768892933432568	C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default/CMakeFiles/SplitSCM.dir/CXXModules.json	eb980469a7de3788
+132	157	7768892933432568	CMakeFiles/SplitSCM.dir/main.cpp.obj.modmap	eb980469a7de3788
+132	157	7768892933432568	CMakeFiles/SplitSCM.dir/src/utils/ObjectStore.cpp.obj.modmap	eb980469a7de3788
+132	157	7768892933432568	CMakeFiles/SplitSCM.dir/src/stores/Index.cpp.obj.modmap	eb980469a7de3788
+132	157	7768892933432568	CMakeFiles/SplitSCM.dir/src/stores/Repository.cpp.obj.modmap	eb980469a7de3788
+132	157	7768892933432568	CMakeFiles/SplitSCM.dir/src/utils/DeltaCompressor.cpp.obj.modmap	eb980469a7de3788
+159	839	7768892933695548	CMakeFiles/SplitSCM.dir/main.cpp.obj	938c3f1248ceda45
+839	1002	7768892940501930	SplitSCM.exe	fcb12bf3916f41f6
+21	125	7768893272664735	CMakeFiles/SplitSCM.dir/main.cpp.obj.ddi	4a2732f38c53623b
+125	151	7768893273712416	CMakeFiles/SplitSCM.dir/CXX.dd	eb980469a7de3788
+125	151	7768893273712416	C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default/CMakeFiles/SplitSCM.dir/CXXModules.json	eb980469a7de3788
+125	151	7768893273712416	CMakeFiles/SplitSCM.dir/main.cpp.obj.modmap	eb980469a7de3788
+125	151	7768893273712416	CMakeFiles/SplitSCM.dir/src/utils/ObjectStore.cpp.obj.modmap	eb980469a7de3788
+125	151	7768893273712416	CMakeFiles/SplitSCM.dir/src/stores/Index.cpp.obj.modmap	eb980469a7de3788
+125	151	7768893273712416	CMakeFiles/SplitSCM.dir/src/stores/Repository.cpp.obj.modmap	eb980469a7de3788
+125	151	7768893273712416	CMakeFiles/SplitSCM.dir/src/utils/DeltaCompressor.cpp.obj.modmap	eb980469a7de3788
+152	801	7768893273975093	CMakeFiles/SplitSCM.dir/main.cpp.obj	938c3f1248ceda45
+801	917	7768893280473575	SplitSCM.exe	fcb12bf3916f41f6

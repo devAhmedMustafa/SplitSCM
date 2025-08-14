@@ -12,7 +12,7 @@ namespace Split {
 
     public:
         std::string encode(const std::string& , const std::string& );
-        std::string decode( const std::string& , std::string&);
+        std::string decode( const std::string& , const std::string&);
     };
 }
 

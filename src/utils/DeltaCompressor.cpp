@@ -22,27 +22,16 @@ namespace Split {
         return deltaOut;
     }
 
-    std::string DeltaCompressor::decode(const std::string& baseFile, std::string& outputFile) {
+    std::string DeltaCompressor::decode(const std::string& baseBytes, const std::string& deltaBytes) {
 
         std::string targetOut;
 
-//        uint8_t output = 0;
-//        usize_t outputSize = 0;
-//
-//        int red = xd3_decode_memory(
-//            (const unsigned char*)baseFile.data(), baseFile.size(),
-//            (const unsigned char*)targetOut.data(), targetOut.size(),
-//            &output, &outputSize,
-//            XD3_DEFAULT_WINSIZE, 0
-//        );
-//
-//        if (red != 0) {
-//            if (output) free(&output);
-//            throw std::runtime_error("Failed to decode delta: " + std::string(xd3_strerror(red)));
-//        }
-//
-//        targetOut.assign((char*)output, outputSize);
-//        free(&output);
+        open_vcdiff::VCDiffDecoder decoder;
+
+        if (!decoder.Decode(baseBytes.data(), baseBytes.size(), deltaBytes, &targetOut)) {
+            throw std::runtime_error("Failed to decode delta.");
+        }
+
         return targetOut;
     }
 

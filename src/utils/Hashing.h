@@ -15,7 +15,7 @@ namespace Split {
     class Hashing {
     public:
 
-        static std::string computeHash(const std::string& filePath) {
+        static std::string computeFileHash(const std::string& filePath) {
             std::ifstream file(filePath, std::ios::binary);
             if (!file.is_open()) {
                 throw std::runtime_error("Could not open file for hashing: " + filePath);
@@ -27,6 +27,12 @@ namespace Split {
                 sha1.update(reinterpret_cast<uint8_t*>(buffer), file.gcount());
             }
 
+            return sha1.final();
+        }
+
+        static std::string computeHash(const std::string& bytes) {
+            SHA1 sha1;
+            sha1.update(reinterpret_cast<const uint8_t*>(bytes.data()), bytes.size());
             return sha1.final();
         }
 

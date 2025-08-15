@@ -13,6 +13,7 @@ namespace Split {
     struct IndexEntry {
         std::string filePath;
         std::string blobHash;
+        std::string baseVersionHash;
         uint32_t mode; // File mode (permissions)
         uint64_t size;
         uint64_t mtime; // Last modified time
@@ -22,6 +23,7 @@ namespace Split {
     class Index {
 
         std::string path;
+        std::string rootPath;
         std::map<std::string, IndexEntry> entries; // Maps file paths to their base version hashes
 
     public:

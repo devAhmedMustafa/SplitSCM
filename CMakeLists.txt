@@ -29,6 +29,8 @@ add_library(scm_lib
         src/utils/Time.h
         src/components/Commit.h
         src/components/Tree.h
+        src/stores/Pack.cpp
+        src/stores/Pack.h
 )
 target_include_directories(scm_lib PUBLIC src ${OPENVCDIFF_INCLUDE})
 target_link_libraries(scm_lib PRIVATE vcdiff)
@@ -49,7 +51,11 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 # --- Test executable ---
-add_executable(runTests tests/DeltaCompressorTest.cpp)
+add_executable(runTests
+        tests/DeltaCompressorTest.cpp
+        tests/PackTest.cpp
+        tests/ObjectStoreTest.cpp
+)
 target_link_libraries(runTests PRIVATE scm_lib gtest_main)
 
 # --- Discover tests automatically ---

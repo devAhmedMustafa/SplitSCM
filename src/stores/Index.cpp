@@ -4,12 +4,17 @@
 #include <utility>
 #include <fstream>
 #include <filesystem>
+#include <utils/ObjectStore.h>
 
+#include "Pack.h"
 #include "../utils/Hashing.h"
 
 namespace Split {
 
-    Index::Index(std::string rootPath) : path(std::move(rootPath) + "/.split/index") {
+    Index::Index(std::string rootPath) :
+        path(std::move(rootPath) + "/.split/index"),
+        rootPath(std::move(rootPath))
+    {
         std::fstream fs;
         fs.open(this->path, std::ios::in | std::ios::binary);
 
@@ -18,7 +23,26 @@ namespace Split {
             fs.close();
         } else {
             IndexEntry entry;
-            while (fs.read(reinterpret_cast<char*>(&entry), sizeof(IndexEntry))) {
+            while (fs.read(reinterpret_cast<char*>(&entry.filePath), sizeof(entry.filePath))) {
+                uint32_t pathLen;
+                fs.read(reinterpret_cast<char*>(&pathLen), sizeof(pathLen));
+                entry.filePath.resize(pathLen);
+                fs.read(entry.filePath.data(), pathLen);
+
+                uint32_t hashLen;
+                fs.read(reinterpret_cast<char*>(&hashLen), sizeof(hashLen));
+                entry.blobHash.resize(hashLen);
+                fs.read(entry.blobHash.data(), hashLen);
+
+                fs.read(reinterpret_cast<char*>(&hashLen), sizeof(hashLen));
+                entry.baseVersionHash.resize(hashLen);
+                fs.read(entry.baseVersionHash.data(), hashLen);
+
+                fs.read(reinterpret_cast<char*>(&entry.mode), sizeof(entry.mode));
+                fs.read(reinterpret_cast<char*>(&entry.size), sizeof(entry.size));
+                fs.read(reinterpret_cast<char*>(&entry.mtime), sizeof(entry.mtime));
+                fs.read(reinterpret_cast<char*>(&entry.isDeleted), sizeof(entry.isDeleted));
+
                 entries[entry.filePath] = entry;
             }
             fs.close();
@@ -26,22 +50,43 @@ namespace Split {
     }
 
     void Index::stageFile(const std::string &filepath) {
+
         IndexEntry entry = {
-            filepath, "", 0, 0, 0, false
+            filepath, "", "", 0, 0, 0, false
         };
 
-        const std::string blobHash = Hashing::computeHash(filepath);
+        ObjectStore objectStore(rootPath, "/blobs");
+
+        const std::string blobHash = objectStore.storeFileObject(filepath);
+
+        std::fstream originalFs(filepath, std::ios::in | std::ios::binary);
 
         if (entries.find(filepath) != entries.end()) {
             if (entries[filepath].blobHash == blobHash) {
                 return;
             }
+            entry.baseVersionHash = entries[filepath].baseVersionHash;
+
+            Pack pack(rootPath);
+            auto decodedContent = pack.getDecodedContent(entries[filepath].baseVersionHash);
+
+            if (decodedContent.empty()) {
+                throw std::runtime_error("Failed to decode content for " + filepath);
+            }
+
+            ObjectStore baseObjectStore(rootPath, "/blobs");
+            auto baseBlobStream = baseObjectStore.loadObject(entries[filepath].baseVersionHash);
+
+            std::ostringstream targetStream;
+            targetStream << baseBlobStream.rdbuf();
+            std::string baseContent = targetStream.str();
+
+            pack.encodeDelta(baseContent, decodedContent, entry.baseVersionHash);
         }
         else {
-
+            entry.baseVersionHash = blobHash;
         }
 
-        std::fstream originalFs(filepath, std::ios::in | std::ios::binary);
         if (originalFs.is_open()) {
             originalFs.seekg(0, std::ios::end);
             entry.size = originalFs.tellg();
@@ -53,31 +98,38 @@ namespace Split {
         entry.blobHash = blobHash;
 
         entries[filepath] = entry;
+        // Delete the created blob
+        objectStore.deleteObject(blobHash);
 
         // Write the updated index to disk
-        std::fstream fs(this->path, std::ios::out | std::ios::binary);
+        std::ofstream indexFs(this->path);
 
         for (const auto &pair : entries) {
             const IndexEntry &e = pair.second;
 
             // Serialize filePath
             uint32_t pathLen = e.filePath.size();
-            fs.write(reinterpret_cast<const char*>(&pathLen), sizeof(pathLen));
-            fs.write(e.filePath.data(), pathLen);
+            indexFs.write(reinterpret_cast<const char*>(&pathLen), sizeof(pathLen));
+            indexFs.write(e.filePath.data(), pathLen);
 
             // Serialize blobHash
             uint32_t hashLen = e.blobHash.size();
-            fs.write(reinterpret_cast<const char*>(&hashLen), sizeof(hashLen));
-            fs.write(e.blobHash.data(), hashLen);
+            indexFs.write(reinterpret_cast<const char*>(&hashLen), sizeof(hashLen));
+            indexFs.write(e.blobHash.data(), hashLen);
+
+            // Serialize baseVersionHash
+            uint32_t baseHashLen = e.baseVersionHash.size();
+            indexFs.write(reinterpret_cast<const char*>(&baseHashLen), sizeof(baseHashLen));
+            indexFs.write(e.baseVersionHash.data(), baseHashLen);
 
             // Serialize other fields
-            fs.write(reinterpret_cast<const char*>(&e.mode), sizeof(e.mode));
-            fs.write(reinterpret_cast<const char*>(&e.size), sizeof(e.size));
-            fs.write(reinterpret_cast<const char*>(&e.mtime), sizeof(e.mtime));
-            fs.write(reinterpret_cast<const char*>(&e.isDeleted), sizeof(e.isDeleted));
+            indexFs.write(reinterpret_cast<const char*>(&e.mode), sizeof(e.mode));
+            indexFs.write(reinterpret_cast<const char*>(&e.size), sizeof(e.size));
+            indexFs.write(reinterpret_cast<const char*>(&e.mtime), sizeof(e.mtime));
+            indexFs.write(reinterpret_cast<const char*>(&e.isDeleted), sizeof(e.isDeleted));
         }
 
-        fs.close();
+        indexFs.close();
     }
 
     std::map<std::string, std::string> Index::getStagedFiles() const {

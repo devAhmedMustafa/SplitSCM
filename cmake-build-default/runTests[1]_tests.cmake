@@ -1,3 +1,7 @@
 add_test([=[DeltaCompressorTest.CompressAndDecompress]=]  [==[C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default/runTests.exe]==] [==[--gtest_filter=DeltaCompressorTest.CompressAndDecompress]==] --gtest_also_run_disabled_tests)
 set_tests_properties([=[DeltaCompressorTest.CompressAndDecompress]=]  PROPERTIES WORKING_DIRECTORY [==[C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-set(  runTests_TESTS DeltaCompressorTest.CompressAndDecompress)
+add_test([=[PackTest.EncodeDecode]=]  [==[C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default/runTests.exe]==] [==[--gtest_filter=PackTest.EncodeDecode]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[PackTest.EncodeDecode]=]  PROPERTIES WORKING_DIRECTORY [==[C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+add_test([=[ObjectStoreTest.StoreFiles]=]  [==[C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default/runTests.exe]==] [==[--gtest_filter=ObjectStoreTest.StoreFiles]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[ObjectStoreTest.StoreFiles]=]  PROPERTIES WORKING_DIRECTORY [==[C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+set(  runTests_TESTS DeltaCompressorTest.CompressAndDecompress PackTest.EncodeDecode ObjectStoreTest.StoreFiles)

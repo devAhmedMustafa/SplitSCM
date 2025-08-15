@@ -12,7 +12,8 @@
 
 namespace Split {
 
-    ObjectStore::ObjectStore(const std::string & path) : path( "/.split/objects" + path) {
+    ObjectStore::ObjectStore(const std::string& rootPath, const std::string & path) {
+        this->path = rootPath + basePath + path;
         std::filesystem::create_directories(this->path);
     }
 
@@ -29,7 +30,7 @@ namespace Split {
             throw std::runtime_error("Failed to open file: " + filePath);
         }
 
-        std::string hash = Hashing::computeHash(filePath);
+        std::string hash = Hashing::computeFileHash(filePath);
         const std::string objectPath = path + "/" + hash;
 
         if (hasObject(hash)) {
@@ -47,13 +48,48 @@ namespace Split {
         return hash;
     }
 
-    std::fstream * ObjectStore::loadObject(const std::string &hash) const {
+    std::string ObjectStore::storeBytesObject(const std::string &bytes) const {
+        if (bytes.empty()) {
+            throw std::invalid_argument("Cannot store empty bytes.");
+        }
+
+        std::string hash = Hashing::computeHash(bytes);
         const std::string objectPath = path + "/" + hash;
-        auto *fileStream = new std::fstream(objectPath, std::ios::in | std::ios::binary);
-        if (!fileStream->is_open()) {
-            delete fileStream;
+
+        if (hasObject(hash)) {
+            return hash;
+        }
+
+        std::ofstream outFile(objectPath, std::ios::binary);
+        if (!outFile) {
+            throw std::runtime_error("Failed to create object file: " + objectPath);
+        }
+
+        outFile.write(bytes.data(), bytes.size());
+        outFile.close();
+
+        return hash;
+    }
+
+    std::fstream ObjectStore::loadObject(const std::string &hash) const {
+        const std::string objectPath = path + "/" + hash;
+        auto fileStream = std::fstream(objectPath, std::ios::in | std::ios::binary);
+        if (!fileStream.is_open()) {
+            fileStream.close();
             throw std::runtime_error("Failed to open object file: " + objectPath);
         }
         return fileStream;
+    }
+
+    void ObjectStore::deleteObject(const std::string &hash) const {
+        const std::string objectPath = path + "/" + hash;
+        if (std::filesystem::exists(objectPath)) {
+            if (!std::filesystem::remove(objectPath)) {
+                throw std::runtime_error("Failed to delete object file: " + objectPath);
+            }
+        }
+        else {
+            throw std::runtime_error("Object file does not exist: " + objectPath);
+        }
     }
 }

@@ -17,7 +17,6 @@ namespace Split {
         std::string name;
         std::string rootPath;
         Index index;
-        ObjectStore objectStore;
         CommitHistory history;
 
     public:

@@ -22,13 +22,15 @@ target_link_libraries(vcdiff INTERFACE
 add_library(scm_lib
         src/stores/ObjectStore.cpp
         src/stores/Index.cpp
-        src/stores/Repository.cpp
+        src/components/Repository.cpp
         src/utils/DeltaCompressor.cpp
         src/utils/SHA1.h
         src/utils/Hashing.h
         src/utils/Time.h
         src/components/Commit.h
+        src/components/Commit.cpp
         src/components/Tree.h
+        src/components/Tree.cpp
         src/stores/Pack.cpp
         src/stores/Pack.h
         src/core/Alias.h
@@ -57,6 +59,8 @@ add_executable(runTests
         tests/PackTest.cpp
         tests/ObjectStoreTest.cpp
         tests/IndexTest.cpp
+        tests/TimeTest.cpp
+        tests/TreeTest.cpp
 )
 target_link_libraries(runTests PRIVATE scm_lib gtest_main)
 

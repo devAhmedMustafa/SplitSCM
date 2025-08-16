@@ -7,20 +7,19 @@
 
 #include <string>
 #include <map>
+#include <utility>
+
+#include "core/Alias.h"
 
 namespace Split {
 
     class Tree {
         std::map<std::string, std::string> entries; // Maps file paths to their hashes
     public:
-        std::byte* serialize() {
-            return nullptr; // Placeholder for serialization logic
-        }
-
-        static Tree deserialize(const std::byte* data, size_t size) {
-            Tree tree;
-            return tree;
-        }
+        explicit Tree(std::map<std::string, std::string> entries = {}) : entries(std::move(entries)) {}
+        str serialize() const;
+        str getEntry(const str& file) { return this->entries[file]; }
+        static Tree deserialize(std::istream& in);
     };
 
 }

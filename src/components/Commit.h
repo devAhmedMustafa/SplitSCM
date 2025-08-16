@@ -6,11 +6,15 @@
 #define COMMIT_H
 
 #include <string>
+#include <stores/Index.h>
+
+#include "core/Alias.h"
 
 namespace Split {
 
     class Commit {
 
+        str rootPath;
         std::string treeHash;
         std::string parentHash;
         std::string message;
@@ -19,16 +23,10 @@ namespace Split {
 
     public:
 
-        std::byte* serialize() {
-            // Placeholder for serialization logic
-            return nullptr;
-        }
-
-        static Commit deserialize(const std::byte* data, size_t size) {
-            Commit commit;
-            // Placeholder for deserialization logic
-            return commit;
-        }
+        Commit(const str &rootPath, const str& message, const str& author, const str& parentHash = "");
+        void commit (const Index& index);
+        str serialize() const;
+        static Commit deserialize(std::istream& in);
 
     };
 

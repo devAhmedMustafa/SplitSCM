@@ -8,9 +8,9 @@
 #include <string>
 #include <ctime>
 
-namespace Split {
+namespace Split::Time {
 
-    std::string getCurrentTime() {
+    inline std::string getCurrentTime() {
         time_t now = time(nullptr);
         char buf[64];
         strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", localtime(&now));

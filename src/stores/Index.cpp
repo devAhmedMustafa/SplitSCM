@@ -73,19 +73,24 @@ namespace Split {
             entry.baseVersionHash = entries[filepath].baseVersionHash;
 
             Pack pack(rootPath);
-            auto decodedContent = pack.getDecodedContent(entries[filepath].baseVersionHash);
+            auto decodedContent = pack.getDecodedContent(blobHash);
 
             if (decodedContent.empty()) {
                 throw std::runtime_error("Failed to decode content for " + filepath);
             }
 
-            auto baseBlobStream = objectStore.loadObject(entries[filepath].baseVersionHash);
+            std::ostringstream fileStream;
+            fileStream << originalFs.rdbuf();
+            std::string targetContent = fileStream.str();
 
-            std::ostringstream targetStream;
-            targetStream << baseBlobStream.rdbuf();
-            std::string baseContent = targetStream.str();
+            if (decodedContent == "\n") {
+                auto baseBlobStream = objectStore.loadObject(entries[filepath].baseVersionHash);
+                std::ostringstream baseBlobStringStream;
+                baseBlobStringStream << baseBlobStream.rdbuf();
+                decodedContent = baseBlobStringStream.str();
+            }
 
-            pack.encodeDelta(baseContent, decodedContent, entry.baseVersionHash);
+            pack.encodeDelta(decodedContent, targetContent, entry.baseVersionHash, blobHash);
         }
         else {
             entry.baseVersionHash = blobHash;

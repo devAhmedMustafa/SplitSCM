@@ -11,7 +11,7 @@
 
 namespace Split {
 
-    Pack::Pack(const std::string& rootPath) : path(rootPath + "/.split/refs/packs"), rootPath(rootPath) {
+    Pack::Pack(const str& rootPath) : path(rootPath + "/.split/refs/packs"), rootPath(rootPath) {
 
         // Ensure the directory exists
         std::filesystem::create_directories(path);
@@ -19,44 +19,64 @@ namespace Split {
         // Load existing packs from the directory
         for (const auto &entry : std::filesystem::directory_iterator(path)) {
             if (entry.is_regular_file()) {
-                std::string baseHash = entry.path().stem().string();
-                std::queue<std::string> objectQueue;
+                str hash = entry.path().stem().string();
+
+                str baseHash;
+                std::queue<str> objectQueue;
 
                 std::ifstream file(entry.path());
-                std::string objectHash;
+                str objectHash;
+
+                if (!file.is_open()) {
+                    throw std::runtime_error("Failed to open pack file: " + entry.path().string());
+                }
+
+                if (std::getline(file, baseHash)) {
+                    if (baseHash.empty()) {
+                        throw std::runtime_error("Base hash is empty in pack file: " + entry.path().string());
+                    }
+                } else {
+                    throw std::runtime_error("Failed to read base hash from pack file: " + entry.path().string());
+                }
+
                 while (std::getline(file, objectHash)) {
                     if (!objectHash.empty()) {
                         objectQueue.push(objectHash);
                     }
                 }
-                packs[baseHash] = objectQueue;
+
+                packs[hash].first = baseHash;
+                packs[hash].second = objectQueue;
             }
         }
     }
 
-    std::queue<std::string> Pack::getPack(const std::string &baseHash) const {
+    std::queue<str> Pack::getPack(const str &baseHash) const {
         auto it = packs.find(baseHash);
         if (it != packs.end()) {
-            return it->second;
+            return it->second.second;
         }
         return {};
     }
 
-    void Pack::savePack(const std::string &baseHash) const {
-        auto it = packs.find(baseHash);
+    void Pack::savePack(const str &hash) const {
+        auto it = packs.find(hash);
         if (it == packs.end()) {
             return;
         }
 
-        std::string filePath = rootPath + "/.split/refs/packs/" + baseHash + ".pack";
+        str filePath = rootPath + "/.split/refs/packs/" + hash + ".pack";
         std::ofstream file(filePath);
 
         if (!file.is_open()) {
             throw std::runtime_error("Failed to open pack file for writing: " + filePath);
         }
 
-        const std::queue<std::string> &objectQueue = it->second;
-        std::queue<std::string> tempQueue = objectQueue;
+        const str &baseHashStr = it->second.first;
+        file << baseHashStr << "\n";
+
+        const std::queue<str> &objectQueue = it->second.second;
+        std::queue<str> tempQueue = objectQueue;
 
         while (!tempQueue.empty()) {
             file << tempQueue.front() << "\n";
@@ -66,38 +86,42 @@ namespace Split {
         file.close();
     }
 
-    std::string Pack::getDecodedContent(const std::string& baseHash) {
-        auto it = packs.find(baseHash);
-        if (it == packs.end() || it->second.empty()) {
-            packs[baseHash] = std::queue<std::string>();
+    str Pack::getDecodedContent(const str& hash) {
+        auto it = packs.find(hash);
+        if (it == packs.end() || it->second.second.empty()) {
+            return "\n";
         }
 
-        const std::queue<std::string> &objectQueue = packs[baseHash];
-        std::queue<std::string> tempQueue = objectQueue;
+        const str &baseHash = it->second.first;
+        const std::queue<str> &objectQueue = packs[hash].second;
+
+        std::queue<str> tempQueue = objectQueue;
 
         const ObjectStore blobsObjectStore(rootPath, "/blobs");
         const ObjectStore deltasObjectStore(rootPath, "/deltas");
+
         DeltaCompressor compressor;
 
         if (!blobsObjectStore.hasObject(baseHash)) {
-            throw std::runtime_error("Base object not found: " + baseHash);
+            throw std::runtime_error("Base object not found: " + hash);
         }
 
         std::ostringstream oss;
         oss << blobsObjectStore.loadObject(baseHash).rdbuf();
-        std::string content = oss.str();
-        std::cout << "Base content loaded for hash: " << content << std::endl;
+        str content = oss.str();
 
         while (!tempQueue.empty()) {
-            std::string objectHash = tempQueue.front();
+            str objectHash = tempQueue.front();
             tempQueue.pop();
 
             if (!deltasObjectStore.hasObject(objectHash)) {
                 throw std::runtime_error("Object not found in deltas: " + objectHash);
             }
+
             std::ostringstream deltaStream;
             deltaStream << deltasObjectStore.loadObject(objectHash).rdbuf();
-            std::string deltaContent = deltaStream.str();
+            str deltaContent = deltaStream.str();
+
             try {
                 content = compressor.decode(content, deltaContent);
             } catch (const std::runtime_error &e) {
@@ -108,7 +132,7 @@ namespace Split {
         return content;
     }
 
-    std::string Pack::encodeDelta(const std::string& baseBytes, const std::string& targetBytes, const std::string& baseHash) {
+    str Pack::encodeDelta(const str& baseBytes, const str& targetBytes, const str& baseHash, const str& targetHash) {
         DeltaCompressor compressor;
         auto delta = compressor.encode(baseBytes, targetBytes);
         if (delta.empty()) {
@@ -117,22 +141,23 @@ namespace Split {
 
         // Save the delta to the deltas object store
         ObjectStore deltasObjectStore(rootPath, "/deltas");
-        std::string deltaHash = deltasObjectStore.storeBytesObject(delta);
+        str deltaHash = deltasObjectStore.storeBytesObject(delta);
         if (deltaHash.empty()) {
             throw std::runtime_error("Failed to store delta object.");
         }
 
         // Add the delta to the pack
-        const auto packIt = packs.find(baseHash);
+        const auto packIt = packs.find(targetHash);
         if (packIt != packs.end()) {
-            packIt->second.push(deltaHash);
+            packIt->second.second.push(deltaHash);
         } else {
-            std::queue<std::string> newQueue;
+            packs[targetHash].first = baseHash;
+            std::queue<str> newQueue;
             newQueue.push(deltaHash);
-            packs[baseHash] = newQueue;
+            packs[targetHash].second = newQueue;
         }
 
-        savePack(baseHash);
+        savePack(targetHash);
         return deltaHash;
     }
 

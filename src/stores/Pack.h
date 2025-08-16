@@ -9,21 +9,23 @@
 #include <queue>
 #include <string>
 
+#include "core/Alias.h"
+
 namespace Split {
 
     class Pack {
 
         std::string rootPath;
         std::string path;
-        std::map<std::string, std::queue<std::string>> packs;
+        std::map<str, std::pair<str, std::queue<str>>> packs;
 
     public:
 
-        Pack(const std::string& rootPath);
-        std::queue<std::string> getPack(const std::string &baseHash) const;
-        void savePack(const std::string &baseHash) const;
-        std::string getDecodedContent(const std::string&);
-        std::string encodeDelta(const std::string& baseBytes, const std::string& targetBytes, const std::string& baseHash);
+        Pack(const str& rootPath);
+        std::queue<str> getPack(const str &baseHash) const;
+        void savePack(const str &hash) const;
+        str getDecodedContent(const str&);
+        str encodeDelta(const str& baseBytes, const str& targetBytes, const str& baseHash, const str& targetHash);
     };
 
 }

@@ -8,4 +8,6 @@ add_test([=[IndexTest.StageCreatedFile]=]  [==[C:/Users/Ahmed Mustafa/Desktop/Sp
 set_tests_properties([=[IndexTest.StageCreatedFile]=]  PROPERTIES WORKING_DIRECTORY [==[C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
 add_test([=[IndexTest.StageModified]=]  [==[C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default/runTests.exe]==] [==[--gtest_filter=IndexTest.StageModified]==] --gtest_also_run_disabled_tests)
 set_tests_properties([=[IndexTest.StageModified]=]  PROPERTIES WORKING_DIRECTORY [==[C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-set(  runTests_TESTS DeltaCompressorTest.CompressAndDecompress PackTest.EncodeDecode ObjectStoreTest.StoreFiles IndexTest.StageCreatedFile IndexTest.StageModified)
+add_test([=[IndexTest.StageUnmodified]=]  [==[C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default/runTests.exe]==] [==[--gtest_filter=IndexTest.StageUnmodified]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[IndexTest.StageUnmodified]=]  PROPERTIES WORKING_DIRECTORY [==[C:/Users/Ahmed Mustafa/Desktop/SplitSCM/cmake-build-default]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+set(  runTests_TESTS DeltaCompressorTest.CompressAndDecompress PackTest.EncodeDecode ObjectStoreTest.StoreFiles IndexTest.StageCreatedFile IndexTest.StageModified IndexTest.StageUnmodified)

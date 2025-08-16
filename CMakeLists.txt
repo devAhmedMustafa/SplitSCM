@@ -31,6 +31,7 @@ add_library(scm_lib
         src/components/Tree.h
         src/stores/Pack.cpp
         src/stores/Pack.h
+        src/core/Alias.h
 )
 target_include_directories(scm_lib PUBLIC src ${OPENVCDIFF_INCLUDE})
 target_link_libraries(scm_lib PRIVATE vcdiff)

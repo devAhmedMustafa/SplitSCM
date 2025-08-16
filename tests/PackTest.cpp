@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 #include <fstream>
 #include <filesystem>
-#include <utils/ObjectStore.h>
+#include <stores/ObjectStore.h>
 
 #include <stores/Pack.h>
 

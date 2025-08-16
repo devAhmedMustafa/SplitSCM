@@ -22,7 +22,7 @@ namespace Split {
         Pack(const std::string& rootPath);
         std::queue<std::string> getPack(const std::string &baseHash) const;
         void savePack(const std::string &baseHash) const;
-        std::string getDecodedContent(const std::string&) const;
+        std::string getDecodedContent(const std::string&);
         std::string encodeDelta(const std::string& baseBytes, const std::string& targetBytes, const std::string& baseHash);
     };
 

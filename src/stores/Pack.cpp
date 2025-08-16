@@ -5,8 +5,9 @@
 #include "Pack.h"
 #include <filesystem>
 #include <fstream>
+#include <iostream>
 #include <utils/DeltaCompressor.h>
-#include <utils/ObjectStore.h>
+#include "ObjectStore.h"
 
 namespace Split {
 
@@ -65,13 +66,13 @@ namespace Split {
         file.close();
     }
 
-    std::string Pack::getDecodedContent(const std::string& baseHash) const {
+    std::string Pack::getDecodedContent(const std::string& baseHash) {
         auto it = packs.find(baseHash);
         if (it == packs.end() || it->second.empty()) {
-            return {};
+            packs[baseHash] = std::queue<std::string>();
         }
 
-        const std::queue<std::string> &objectQueue = it->second;
+        const std::queue<std::string> &objectQueue = packs[baseHash];
         std::queue<std::string> tempQueue = objectQueue;
 
         const ObjectStore blobsObjectStore(rootPath, "/blobs");
@@ -85,6 +86,7 @@ namespace Split {
         std::ostringstream oss;
         oss << blobsObjectStore.loadObject(baseHash).rdbuf();
         std::string content = oss.str();
+        std::cout << "Base content loaded for hash: " << content << std::endl;
 
         while (!tempQueue.empty()) {
             std::string objectHash = tempQueue.front();

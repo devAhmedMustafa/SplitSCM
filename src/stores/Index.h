@@ -28,10 +28,11 @@ namespace Split {
 
     public:
 
-        explicit Index(std::string rootPath);
+        explicit Index(const std::string& rootPath);
 
         void stageFile(const std::string& filepath);
         std::map<std::string, std::string> getStagedFiles() const;
+        std::map<std::string, IndexEntry> getEntries() const { return entries; }
         void removeStagedFile(const std::string& filepath);
 
     };

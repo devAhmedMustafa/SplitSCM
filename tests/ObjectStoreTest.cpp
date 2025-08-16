@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <fstream>
 #include <filesystem>
-#include "utils/ObjectStore.h"
+#include "stores/ObjectStore.h"
 
 TEST(ObjectStoreTest, StoreFiles) {
     const std::string rootPath = "test_object_store";

@@ -20,7 +20,7 @@ target_link_libraries(vcdiff INTERFACE
 
 # --- Main library for your project ---
 add_library(scm_lib
-        src/utils/ObjectStore.cpp
+        src/stores/ObjectStore.cpp
         src/stores/Index.cpp
         src/stores/Repository.cpp
         src/utils/DeltaCompressor.cpp
@@ -55,6 +55,7 @@ add_executable(runTests
         tests/DeltaCompressorTest.cpp
         tests/PackTest.cpp
         tests/ObjectStoreTest.cpp
+        tests/IndexTest.cpp
 )
 target_link_libraries(runTests PRIVATE scm_lib gtest_main)
 

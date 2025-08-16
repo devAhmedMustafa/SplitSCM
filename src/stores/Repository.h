@@ -9,7 +9,6 @@
 
 #include "CommitHistory.h"
 #include "Index.h"
-#include "../Utils/ObjectStore.h"
 
 namespace Split {
     class Repository {

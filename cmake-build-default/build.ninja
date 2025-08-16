@@ -49,20 +49,20 @@ cmake_ninja_workdir = C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\cmake-build-defa
 
 build cmake_object_order_depends_target_scm_lib: phony || .
 
-build CMakeFiles\scm_lib.dir\src\utils\ObjectStore.cpp.obj.ddi: CXX_SCAN__scm_lib_Debug C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\src\utils\ObjectStore.cpp || cmake_object_order_depends_target_scm_lib
-  DEP_FILE = CMakeFiles\scm_lib.dir\src\utils\ObjectStore.cpp.obj.ddi.d
-  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\scm_lib.dir\src\utils\ObjectStore.cpp.obj.ddi
+build CMakeFiles\scm_lib.dir\src\stores\ObjectStore.cpp.obj.ddi: CXX_SCAN__scm_lib_Debug C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\src\stores\ObjectStore.cpp || cmake_object_order_depends_target_scm_lib
+  DEP_FILE = CMakeFiles\scm_lib.dir\src\stores\ObjectStore.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\scm_lib.dir\src\stores\ObjectStore.cpp.obj.ddi
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
   INCLUDES = -I"C:\Users\Ahmed Mustafa\Desktop\SplitSCM\src" -I"C:\Users\Ahmed Mustafa\Desktop\SplitSCM\external\open-vcdiff\include"
-  OBJ_FILE = CMakeFiles\scm_lib.dir\src\utils\ObjectStore.cpp.obj
-  PREPROCESSED_OUTPUT_FILE = CMakeFiles\scm_lib.dir\src\utils\ObjectStore.cpp.obj.ddi.i
+  OBJ_FILE = CMakeFiles\scm_lib.dir\src\stores\ObjectStore.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles\scm_lib.dir\src\stores\ObjectStore.cpp.obj.ddi.i
 
-build CMakeFiles\scm_lib.dir\src\utils\ObjectStore.cpp.obj: CXX_COMPILER__scm_lib_scanned_Debug C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\src\utils\ObjectStore.cpp | CMakeFiles\scm_lib.dir\src\utils\ObjectStore.cpp.obj.modmap || cmake_object_order_depends_target_scm_lib CMakeFiles\scm_lib.dir\CXX.dd
-  DYNDEP_MODULE_MAP_FILE = CMakeFiles\scm_lib.dir\src\utils\ObjectStore.cpp.obj.modmap
+build CMakeFiles\scm_lib.dir\src\stores\ObjectStore.cpp.obj: CXX_COMPILER__scm_lib_scanned_Debug C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\src\stores\ObjectStore.cpp | CMakeFiles\scm_lib.dir\src\stores\ObjectStore.cpp.obj.modmap || cmake_object_order_depends_target_scm_lib CMakeFiles\scm_lib.dir\CXX.dd
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles\scm_lib.dir\src\stores\ObjectStore.cpp.obj.modmap
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
   INCLUDES = -I"C:\Users\Ahmed Mustafa\Desktop\SplitSCM\src" -I"C:\Users\Ahmed Mustafa\Desktop\SplitSCM\external\open-vcdiff\include"
   OBJECT_DIR = CMakeFiles\scm_lib.dir
-  OBJECT_FILE_DIR = CMakeFiles\scm_lib.dir\src\utils
+  OBJECT_FILE_DIR = CMakeFiles\scm_lib.dir\src\stores
   TARGET_COMPILE_PDB = CMakeFiles\scm_lib.dir\scm_lib.pdb
   TARGET_PDB = scm_lib.pdb
   dyndep = CMakeFiles/scm_lib.dir/CXX.dd
@@ -139,7 +139,7 @@ build CMakeFiles\scm_lib.dir\src\stores\Pack.cpp.obj: CXX_COMPILER__scm_lib_scan
   TARGET_PDB = scm_lib.pdb
   dyndep = CMakeFiles/scm_lib.dir/CXX.dd
 
-build CMakeFiles\scm_lib.dir\CXX.dd | C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\cmake-build-default\CMakeFiles\scm_lib.dir\CXXModules.json CMakeFiles\scm_lib.dir\src\utils\ObjectStore.cpp.obj.modmap CMakeFiles\scm_lib.dir\src\stores\Index.cpp.obj.modmap CMakeFiles\scm_lib.dir\src\stores\Repository.cpp.obj.modmap CMakeFiles\scm_lib.dir\src\utils\DeltaCompressor.cpp.obj.modmap CMakeFiles\scm_lib.dir\src\stores\Pack.cpp.obj.modmap: CXX_DYNDEP__scm_lib_Debug CMakeFiles\scm_lib.dir\src\utils\ObjectStore.cpp.obj.ddi CMakeFiles\scm_lib.dir\src\stores\Index.cpp.obj.ddi CMakeFiles\scm_lib.dir\src\stores\Repository.cpp.obj.ddi CMakeFiles\scm_lib.dir\src\utils\DeltaCompressor.cpp.obj.ddi CMakeFiles\scm_lib.dir\src\stores\Pack.cpp.obj.ddi | C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\cmake-build-default\CMakeFiles\scm_lib.dir\CXXDependInfo.json
+build CMakeFiles\scm_lib.dir\CXX.dd | C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\cmake-build-default\CMakeFiles\scm_lib.dir\CXXModules.json CMakeFiles\scm_lib.dir\src\stores\ObjectStore.cpp.obj.modmap CMakeFiles\scm_lib.dir\src\stores\Index.cpp.obj.modmap CMakeFiles\scm_lib.dir\src\stores\Repository.cpp.obj.modmap CMakeFiles\scm_lib.dir\src\utils\DeltaCompressor.cpp.obj.modmap CMakeFiles\scm_lib.dir\src\stores\Pack.cpp.obj.modmap: CXX_DYNDEP__scm_lib_Debug CMakeFiles\scm_lib.dir\src\stores\ObjectStore.cpp.obj.ddi CMakeFiles\scm_lib.dir\src\stores\Index.cpp.obj.ddi CMakeFiles\scm_lib.dir\src\stores\Repository.cpp.obj.ddi CMakeFiles\scm_lib.dir\src\utils\DeltaCompressor.cpp.obj.ddi CMakeFiles\scm_lib.dir\src\stores\Pack.cpp.obj.ddi | C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\cmake-build-default\CMakeFiles\scm_lib.dir\CXXDependInfo.json
 
 
 # =============================================================================
@@ -149,7 +149,7 @@ build CMakeFiles\scm_lib.dir\CXX.dd | C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\
 #############################################
 # Link the static library scm_lib.lib
 
-build scm_lib.lib: CXX_STATIC_LIBRARY_LINKER__scm_lib_Debug CMakeFiles\scm_lib.dir\src\utils\ObjectStore.cpp.obj CMakeFiles\scm_lib.dir\src\stores\Index.cpp.obj CMakeFiles\scm_lib.dir\src\stores\Repository.cpp.obj CMakeFiles\scm_lib.dir\src\utils\DeltaCompressor.cpp.obj CMakeFiles\scm_lib.dir\src\stores\Pack.cpp.obj
+build scm_lib.lib: CXX_STATIC_LIBRARY_LINKER__scm_lib_Debug CMakeFiles\scm_lib.dir\src\stores\ObjectStore.cpp.obj CMakeFiles\scm_lib.dir\src\stores\Index.cpp.obj CMakeFiles\scm_lib.dir\src\stores\Repository.cpp.obj CMakeFiles\scm_lib.dir\src\utils\DeltaCompressor.cpp.obj CMakeFiles\scm_lib.dir\src\stores\Pack.cpp.obj
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -MDd -Zi
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = CMakeFiles\scm_lib.dir
@@ -271,7 +271,25 @@ build CMakeFiles\runTests.dir\tests\ObjectStoreTest.cpp.obj: CXX_COMPILER__runTe
   TARGET_PDB = runTests.pdb
   dyndep = CMakeFiles/runTests.dir/CXX.dd
 
-build CMakeFiles\runTests.dir\CXX.dd | C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\cmake-build-default\CMakeFiles\runTests.dir\CXXModules.json CMakeFiles\runTests.dir\tests\DeltaCompressorTest.cpp.obj.modmap CMakeFiles\runTests.dir\tests\PackTest.cpp.obj.modmap CMakeFiles\runTests.dir\tests\ObjectStoreTest.cpp.obj.modmap: CXX_DYNDEP__runTests_Debug CMakeFiles\runTests.dir\tests\DeltaCompressorTest.cpp.obj.ddi CMakeFiles\runTests.dir\tests\PackTest.cpp.obj.ddi CMakeFiles\runTests.dir\tests\ObjectStoreTest.cpp.obj.ddi | C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\cmake-build-default\CMakeFiles\runTests.dir\CXXDependInfo.json
+build CMakeFiles\runTests.dir\tests\IndexTest.cpp.obj.ddi: CXX_SCAN__runTests_Debug C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\tests\IndexTest.cpp || cmake_object_order_depends_target_runTests
+  DEP_FILE = CMakeFiles\runTests.dir\tests\IndexTest.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\runTests.dir\tests\IndexTest.cpp.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -I"C:\Users\Ahmed Mustafa\Desktop\SplitSCM\src" -I"C:\Users\Ahmed Mustafa\Desktop\SplitSCM\external\open-vcdiff\include" -external:I"C:\Users\Ahmed Mustafa\Desktop\SplitSCM\cmake-build-default\_deps\googletest-src\googletest\include" -external:I"C:\Users\Ahmed Mustafa\Desktop\SplitSCM\cmake-build-default\_deps\googletest-src\googletest" -external:W0
+  OBJ_FILE = CMakeFiles\runTests.dir\tests\IndexTest.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles\runTests.dir\tests\IndexTest.cpp.obj.ddi.i
+
+build CMakeFiles\runTests.dir\tests\IndexTest.cpp.obj: CXX_COMPILER__runTests_scanned_Debug C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\tests\IndexTest.cpp | CMakeFiles\runTests.dir\tests\IndexTest.cpp.obj.modmap || cmake_object_order_depends_target_runTests CMakeFiles\runTests.dir\CXX.dd
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles\runTests.dir\tests\IndexTest.cpp.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -I"C:\Users\Ahmed Mustafa\Desktop\SplitSCM\src" -I"C:\Users\Ahmed Mustafa\Desktop\SplitSCM\external\open-vcdiff\include" -external:I"C:\Users\Ahmed Mustafa\Desktop\SplitSCM\cmake-build-default\_deps\googletest-src\googletest\include" -external:I"C:\Users\Ahmed Mustafa\Desktop\SplitSCM\cmake-build-default\_deps\googletest-src\googletest" -external:W0
+  OBJECT_DIR = CMakeFiles\runTests.dir
+  OBJECT_FILE_DIR = CMakeFiles\runTests.dir\tests
+  TARGET_COMPILE_PDB = CMakeFiles\runTests.dir\
+  TARGET_PDB = runTests.pdb
+  dyndep = CMakeFiles/runTests.dir/CXX.dd
+
+build CMakeFiles\runTests.dir\CXX.dd | C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\cmake-build-default\CMakeFiles\runTests.dir\CXXModules.json CMakeFiles\runTests.dir\tests\DeltaCompressorTest.cpp.obj.modmap CMakeFiles\runTests.dir\tests\PackTest.cpp.obj.modmap CMakeFiles\runTests.dir\tests\ObjectStoreTest.cpp.obj.modmap CMakeFiles\runTests.dir\tests\IndexTest.cpp.obj.modmap: CXX_DYNDEP__runTests_Debug CMakeFiles\runTests.dir\tests\DeltaCompressorTest.cpp.obj.ddi CMakeFiles\runTests.dir\tests\PackTest.cpp.obj.ddi CMakeFiles\runTests.dir\tests\ObjectStoreTest.cpp.obj.ddi CMakeFiles\runTests.dir\tests\IndexTest.cpp.obj.ddi | C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\cmake-build-default\CMakeFiles\runTests.dir\CXXDependInfo.json
 
 
 # =============================================================================
@@ -281,7 +299,7 @@ build CMakeFiles\runTests.dir\CXX.dd | C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM
 #############################################
 # Link the executable runTests.exe
 
-build runTests.exe runTests[1]_tests.cmake | ${cmake_ninja_workdir}runTests[1]_tests.cmake: CXX_EXECUTABLE_LINKER__runTests_Debug CMakeFiles\runTests.dir\tests\DeltaCompressorTest.cpp.obj CMakeFiles\runTests.dir\tests\PackTest.cpp.obj CMakeFiles\runTests.dir\tests\ObjectStoreTest.cpp.obj | scm_lib.lib lib\gtest_main.lib C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\external\open-vcdiff\lib\vcdcom.lib C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\external\open-vcdiff\lib\vcddec.lib C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\external\open-vcdiff\lib\vcdenc.lib C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\external\open-vcdiff\lib\vcdiff.lib lib\gtest.lib || lib\gtest.lib lib\gtest_main.lib scm_lib.lib
+build runTests.exe runTests[1]_tests.cmake | ${cmake_ninja_workdir}runTests[1]_tests.cmake: CXX_EXECUTABLE_LINKER__runTests_Debug CMakeFiles\runTests.dir\tests\DeltaCompressorTest.cpp.obj CMakeFiles\runTests.dir\tests\PackTest.cpp.obj CMakeFiles\runTests.dir\tests\ObjectStoreTest.cpp.obj CMakeFiles\runTests.dir\tests\IndexTest.cpp.obj | scm_lib.lib lib\gtest_main.lib C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\external\open-vcdiff\lib\vcdcom.lib C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\external\open-vcdiff\lib\vcddec.lib C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\external\open-vcdiff\lib\vcdenc.lib C$:\Users\Ahmed$ Mustafa\Desktop\SplitSCM\external\open-vcdiff\lib\vcdiff.lib lib\gtest.lib || lib\gtest.lib lib\gtest_main.lib scm_lib.lib
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -MDd -Zi
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = scm_lib.lib  lib\gtest_main.lib  "C:\Users\Ahmed Mustafa\Desktop\SplitSCM\external\open-vcdiff\lib\vcdcom.lib"  "C:\Users\Ahmed Mustafa\Desktop\SplitSCM\external\open-vcdiff\lib\vcddec.lib"  "C:\Users\Ahmed Mustafa\Desktop\SplitSCM\external\open-vcdiff\lib\vcdenc.lib"  "C:\Users\Ahmed Mustafa\Desktop\SplitSCM\external\open-vcdiff\lib\vcdiff.lib"  lib\gtest.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

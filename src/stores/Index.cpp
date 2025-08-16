@@ -4,16 +4,18 @@
 #include <utility>
 #include <fstream>
 #include <filesystem>
-#include <utils/ObjectStore.h>
+#include <iostream>
+
+#include "ObjectStore.h"
 
 #include "Pack.h"
 #include "../utils/Hashing.h"
 
 namespace Split {
 
-    Index::Index(std::string rootPath) :
-        path(std::move(rootPath) + "/.split/index"),
-        rootPath(std::move(rootPath))
+    Index::Index(const std::string& rootPath) :
+        path(rootPath + "/.split/index"),
+        rootPath(rootPath)
     {
         std::fstream fs;
         fs.open(this->path, std::ios::in | std::ios::binary);
@@ -57,9 +59,12 @@ namespace Split {
 
         ObjectStore objectStore(rootPath, "/blobs");
 
-        const std::string blobHash = objectStore.storeFileObject(filepath);
+        const std::string blobHash = objectStore.storeFileObject(rootPath + filepath);
 
-        std::fstream originalFs(filepath, std::ios::in | std::ios::binary);
+        std::fstream originalFs(rootPath + filepath, std::ios::in | std::ios::binary);
+        if (!originalFs.is_open()) {
+            throw std::runtime_error("Failed to open file: " + filepath);
+        }
 
         if (entries.find(filepath) != entries.end()) {
             if (entries[filepath].blobHash == blobHash) {
@@ -74,8 +79,7 @@ namespace Split {
                 throw std::runtime_error("Failed to decode content for " + filepath);
             }
 
-            ObjectStore baseObjectStore(rootPath, "/blobs");
-            auto baseBlobStream = baseObjectStore.loadObject(entries[filepath].baseVersionHash);
+            auto baseBlobStream = objectStore.loadObject(entries[filepath].baseVersionHash);
 
             std::ostringstream targetStream;
             targetStream << baseBlobStream.rdbuf();
@@ -87,19 +91,21 @@ namespace Split {
             entry.baseVersionHash = blobHash;
         }
 
-        if (originalFs.is_open()) {
-            originalFs.seekg(0, std::ios::end);
-            entry.size = originalFs.tellg();
-            originalFs.seekg(0, std::ios::beg);
-            entry.mtime = std::filesystem::last_write_time(filepath).time_since_epoch().count();
-            originalFs.close();
-        }
+        originalFs.seekg(0, std::ios::end);
+        entry.size = originalFs.tellg();
+        originalFs.seekg(0, std::ios::beg);
+        entry.mtime = std::filesystem::last_write_time(rootPath+filepath).time_since_epoch().count();
+        originalFs.close();
 
         entry.blobHash = blobHash;
 
         entries[filepath] = entry;
         // Delete the created blob
-        objectStore.deleteObject(blobHash);
+        if (blobHash != entry.baseVersionHash) {
+            if (objectStore.hasObject(blobHash)) {
+                objectStore.deleteObject(blobHash);
+            }
+        }
 
         // Write the updated index to disk
         std::ofstream indexFs(this->path);
